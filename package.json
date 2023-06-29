@@ -1,6 +1,6 @@
 {
   "name": "@dldc/pareil",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Diff / Apply buffer for NodeJS and the browser",
   "keywords": [
     "diff",
