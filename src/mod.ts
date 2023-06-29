@@ -52,14 +52,10 @@ function getPage(file: Buffer, pageSize: number, pageIndex: number): Buffer | nu
   if (pageOffset >= file.length) {
     return null;
   }
-  return file.subarray(pageOffset, pageOffset + pageSize);
+  return Buffer.from(file.subarray(pageOffset, pageOffset + pageSize));
 }
 
-function pageDiff(
-  left: Buffer,
-  right: Buffer,
-  entirePageTheshold: number
-): Array<PageCommit> | null {
+function pageDiff(left: Buffer, right: Buffer, entirePageTheshold: number): Array<PageCommit> | null {
   if (left.equals(right)) {
     return null;
   }
@@ -80,13 +76,13 @@ function pageDiff(
       }
     } else {
       if (diffRangeStart !== null) {
-        commits.push([diffRangeStart, right.subarray(diffRangeStart, i).toString('hex')]);
+        commits.push([diffRangeStart, Buffer.from(right.subarray(diffRangeStart, i)).toString('hex')]);
         diffRangeStart = null;
       }
     }
   }
   if (diffRangeStart !== null) {
-    commits.push([diffRangeStart, right.subarray(diffRangeStart).toString('hex')]);
+    commits.push([diffRangeStart, Buffer.from(right.subarray(diffRangeStart)).toString('hex')]);
   }
   return commits;
 }

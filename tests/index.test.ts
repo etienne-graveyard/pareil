@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { apply, diff, expandDiff } from '../src/mod';
 
 function pageSizeBuffer(buf: Buffer, pageSize: number = 512): Buffer {
@@ -26,9 +27,7 @@ test('Diff the apply should be equal', () => {
 });
 
 test('Diff the apply should be equal on big file', () => {
-  const file1 = pageSizeBuffer(
-    Buffer.from([...Array(100000)].map(() => 2 + Math.floor(Math.random() * 200)))
-  );
+  const file1 = pageSizeBuffer(Buffer.from([...Array(100000)].map(() => 2 + Math.floor(Math.random() * 200))));
   const file2 = cloneBuffer(file1);
   file2[100] = 0;
   file2[1000] = 0;
@@ -51,9 +50,7 @@ test('Diff the apply should be equal on big file', () => {
 test('Add page', () => {
   const pageSize = 64;
 
-  const file1 = pageSizeBuffer(
-    Buffer.from([...Array(1024)].map(() => 2 + Math.floor(Math.random() * 200)))
-  );
+  const file1 = pageSizeBuffer(Buffer.from([...Array(1024)].map(() => 2 + Math.floor(Math.random() * 200))));
   const file2 = pageSizeBuffer(Buffer.concat([file1, Buffer.from('Hello World')]), pageSize);
 
   const diff1 = diff(file1, file2, pageSize)!;
@@ -79,9 +76,7 @@ test('Add page', () => {
 test('Remove page', () => {
   const pageSize = 64;
 
-  const file1 = pageSizeBuffer(
-    Buffer.from([...Array(1024)].map(() => 2 + Math.floor(Math.random() * 200)))
-  );
+  const file1 = pageSizeBuffer(Buffer.from([...Array(1024)].map(() => 2 + Math.floor(Math.random() * 200))));
   const file2 = pageSizeBuffer(file1.subarray(0, 896), pageSize);
 
   const diff1 = diff(file1, file2, pageSize)!;
