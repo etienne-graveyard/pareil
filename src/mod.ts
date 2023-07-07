@@ -13,7 +13,7 @@ export function diff(
   left: Buffer | Uint8Array,
   right: Buffer | Uint8Array,
   pageSize: number = DEFAULT_PAGE_SIZE,
-  entirePageTheshold: number = pageSize / 2
+  entirePageTheshold: number = pageSize / 2,
 ): FileDiff | null {
   const leftBuff = Buffer.from(left);
   const rightBuff = Buffer.from(right);

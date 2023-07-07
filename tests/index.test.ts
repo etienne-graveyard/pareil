@@ -102,7 +102,7 @@ test('Many changes should send entire page', () => {
 
   const file1 = pageSizeBuffer(
     Buffer.from([...Array(64 * 4)].map(() => 2 + Math.floor(Math.random() * 200))),
-    pageSize
+    pageSize,
   );
   const file2 = cloneBuffer(file1);
   for (let i = 64; i < 100; i++) {
@@ -127,7 +127,7 @@ test('Detect changes at the end of a page', () => {
 
   const file1 = pageSizeBuffer(
     Buffer.from([...Array(64 * 4)].map(() => 2 + Math.floor(Math.random() * 200))),
-    pageSize
+    pageSize,
   );
   const file2 = cloneBuffer(file1);
   for (let i = 100; i < 128; i++) {
